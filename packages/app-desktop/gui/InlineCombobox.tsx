@@ -97,7 +97,7 @@ const InlineCombobox: React.FC<Props> = ({ inputType, controls, inputStyle, clas
 		if (isGoToNext || event.code === 'ArrowUp') {
 			event.preventDefault();
 
-			if (!event.altKey) {
+			if (!event.altKey && hasSuggestions) {
 				let newSelectedIndex;
 				if (isGoToNext) {
 					newSelectedIndex = (selectedIndex + 1) % filteredSuggestions.length;
@@ -113,13 +113,15 @@ const InlineCombobox: React.FC<Props> = ({ inputType, controls, inputStyle, clas
 			setShowList(true);
 		} else if (event.code === 'Enter') {
 			event.preventDefault();
-			onChange(filteredSuggestions[closestIndex]);
-			setShowList(false);
+			if (closestIndex >= 0) {
+				onChange(filteredSuggestions[closestIndex]);
+				setShowList(false);
+			}
 		} else if (event.code === 'Escape') {
 			event.preventDefault();
 			setShowList(false);
 		}
-	}, [filteredSuggestions, value, selectedIndex, onChange]);
+	}, [filteredSuggestions, value, selectedIndex, onChange, hasSuggestions]);
 
 	const valuesListId = useId();
 
