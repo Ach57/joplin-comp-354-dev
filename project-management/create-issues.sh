@@ -24,7 +24,7 @@ set -euo pipefail
 # Resolve data file (default: issues.yml next to this script)
 # ---------------------------------------------------------------------------
 SCRIPT_DIR="${0:A:h}"
-DATA_FILE="${1:-$SCRIPT_DIR/issues.yml}"
+DATA_FILE="${1:-$SCRIPT_DIR/config/issues.yml}"
 
 if [[ ! -f "$DATA_FILE" ]]; then
   print -P "%F{red}Error:%f Data file not found: $DATA_FILE" >&2

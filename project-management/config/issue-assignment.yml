@@ -1,0 +1,13 @@
+# =============================================================================
+# issues-assignment.yml
+# Data source for assign-issues.sh.
+# Edit this file add assignes to the tickets that contain a specific word in
+# the priority label.
+# =============================================================================
+
+user: Ach57
+project_number: 2
+
+assignments:
+  - priority_contains: NLP
+    assignee: Ach57
