@@ -18,9 +18,8 @@ from typing import Any
 
 import pandas as pd
 
-from thesaurus_nlp.domain.models import Candidate, ScoredCandidate
-from thesaurus_nlp.similarity_ranker import SimilarityRanker
-
+from thesaurus_nlp.models.entities import Candidate, ScoredCandidate
+from thesaurus_nlp.services.similarity_ranker import SimilarityRanker
 
 MODELS = {
     "MiniLM": "sentence-transformers/all-MiniLM-L6-v2",
