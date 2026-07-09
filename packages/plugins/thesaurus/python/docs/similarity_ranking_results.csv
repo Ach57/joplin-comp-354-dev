@@ -1,0 +1,48 @@
+case_id,category,word,context,candidate,is_expected,error,BGE,MPNet,MiniLM
+animal_cat,basic synonym,cat,The cat sat on the mat.,dog,False,False,0.8237799406051636,0.7112802863121033,0.7218878269195557
+animal_cat,basic synonym,cat,The cat sat on the mat.,feline,True,False,0.9579849243164062,0.9472498893737793,0.7194262146949768
+animal_cat,basic synonym,cat,The cat sat on the mat.,kitten,False,False,0.9306501746177673,0.8813169002532959,0.8696454763412476
+bright_idea,figurative language,bright,Her bright idea helped the team solve the production issue quickly.,dull,False,False,0.8708024024963379,0.8944480419158936,0.8924590349197388
+bright_idea,figurative language,bright,Her bright idea helped the team solve the production issue quickly.,intelligent,True,False,0.9447435140609741,0.966433048248291,0.9053667187690735
+bright_idea,figurative language,bright,Her bright idea helped the team solve the production issue quickly.,luminous,False,False,0.9641267657279968,0.9213880300521851,0.9287546873092651
+bright_idea,figurative language,bright,Her bright idea helped the team solve the production issue quickly.,shiny,False,False,0.9545792937278748,0.8863083124160767,0.8233566284179688
+bright_lamp,literal sense,bright,The bright lamp lit every corner of the quiet room.,intelligent,False,False,0.9434822201728821,0.8420865535736084,0.9279508590698242
+bright_lamp,literal sense,bright,The bright lamp lit every corner of the quiet room.,luminous,True,False,0.9633129835128784,0.896579384803772,0.9527735710144043
+bright_lamp,literal sense,bright,The bright lamp lit every corner of the quiet room.,dim,False,False,0.9268124103546143,0.7727017998695374,0.9585093855857849
+bright_lamp,literal sense,bright,The bright lamp lit every corner of the quiet room.,radiant,True,False,0.965402364730835,0.8787877559661865,0.9277817010879517
+financial_bank,word sense disambiguation,bank,The bank approved the small business loan after reviewing the application.,embankment,False,False,0.9279052019119263,0.85041344165802,0.8247471451759338
+financial_bank,word sense disambiguation,bank,The bank approved the small business loan after reviewing the application.,financial institution,True,False,0.9756459593772888,0.9565377235412598,0.9490711688995361
+financial_bank,word sense disambiguation,bank,The bank approved the small business loan after reviewing the application.,lender,True,False,0.9797288179397583,0.9545795321464539,0.9552378058433533
+financial_bank,word sense disambiguation,bank,The bank approved the small business loan after reviewing the application.,shore,False,False,0.9420508742332458,0.8652781248092651,0.8246771097183228
+large_dataset,domain vocabulary,large,The experiment used a large dataset with millions of labeled examples.,big,True,False,0.9889285564422607,0.9904746413230896,0.9802423119544983
+large_dataset,domain vocabulary,large,The experiment used a large dataset with millions of labeled examples.,lengthy,False,False,0.9855552315711975,0.9639750719070435,0.965803861618042
+large_dataset,domain vocabulary,large,The experiment used a large dataset with millions of labeled examples.,substantial,True,False,0.985236644744873,0.9830608367919922,0.9851540923118591
+large_dataset,domain vocabulary,large,The experiment used a large dataset with millions of labeled examples.,tiny,False,False,0.8945008516311646,0.7414791584014893,0.9512988328933716
+legal_charge,word sense disambiguation,charge,The prosecutor filed a serious charge after reviewing the evidence.,accusation,True,False,0.9764491319656372,0.9473747611045837,0.9356331825256348
+legal_charge,word sense disambiguation,charge,The prosecutor filed a serious charge after reviewing the evidence.,attack,False,False,0.9289140701293945,0.8534030914306641,0.8399468660354614
+legal_charge,word sense disambiguation,charge,The prosecutor filed a serious charge after reviewing the evidence.,electrical load,False,False,0.8611432909965515,0.7386359572410583,0.7947915196418762
+legal_charge,word sense disambiguation,charge,The prosecutor filed a serious charge after reviewing the evidence.,fee,False,False,0.9192426800727844,0.8162949085235596,0.9103219509124756
+mouse_animal,word sense disambiguation,mouse,The mouse hid behind the cupboard when the kitchen light turned on.,computer mouse,False,False,0.9519401788711548,0.917522668838501,0.9730691313743591
+mouse_animal,word sense disambiguation,mouse,The mouse hid behind the cupboard when the kitchen light turned on.,pointer,False,False,0.8966399431228638,0.7774953842163086,0.8476422429084778
+mouse_animal,word sense disambiguation,mouse,The mouse hid behind the cupboard when the kitchen light turned on.,rat,True,False,0.9130181670188904,0.8611632585525513,0.8524429798126221
+mouse_animal,word sense disambiguation,mouse,The mouse hid behind the cupboard when the kitchen light turned on.,rodent,True,False,0.9420035481452942,0.8765636682510376,0.8817265033721924
+mouse_device,word sense disambiguation,mouse,She clicked the mouse to open the file on her laptop.,computer mouse,True,False,0.9934704303741455,0.9935582876205444,0.9945365190505981
+mouse_device,word sense disambiguation,mouse,She clicked the mouse to open the file on her laptop.,pointer,True,False,0.9548330307006836,0.9369570016860962,0.9635106325149536
+mouse_device,word sense disambiguation,mouse,She clicked the mouse to open the file on her laptop.,rodent,False,False,0.8903023600578308,0.8872258067131042,0.8745558857917786
+mouse_device,word sense disambiguation,mouse,She clicked the mouse to open the file on her laptop.,keyboard,False,False,0.9495495557785034,0.933556318283081,0.9485335946083069
+phone_charge,word sense disambiguation,charge,My phone needs a charge before we leave for the airport.,accusation,False,False,0.8929735422134399,0.5499160289764404,0.7418381571769714
+phone_charge,word sense disambiguation,charge,My phone needs a charge before we leave for the airport.,attack,False,False,0.8569035530090332,0.5870555639266968,0.752697229385376
+phone_charge,word sense disambiguation,charge,My phone needs a charge before we leave for the airport.,fee,False,False,0.925517201423645,0.6887089014053345,0.9023898243904114
+phone_charge,word sense disambiguation,charge,My phone needs a charge before we leave for the airport.,battery power,True,False,0.8963931798934937,0.8718953728675842,0.8642858862876892
+quick_response,basic synonym,quick,Thank you for the quick response to my support request.,clever,False,False,0.8999761343002319,0.8463653326034546,0.7487093210220337
+quick_response,basic synonym,quick,Thank you for the quick response to my support request.,fast,True,False,0.9699974060058594,0.9755152463912964,0.9351336359977722
+quick_response,basic synonym,quick,Thank you for the quick response to my support request.,prompt,True,False,0.9524435997009277,0.9281807541847229,0.8411777019500732
+quick_response,basic synonym,quick,Thank you for the quick response to my support request.,slow,False,False,0.8381389379501343,0.8734983205795288,0.8442097902297974
+river_bank,word sense disambiguation,bank,"Watching the sunset, the two lovers sat together on the river bank.",shore,True,False,0.9533458948135376,0.9245641231536865,0.9016240239143372
+river_bank,word sense disambiguation,bank,"Watching the sunset, the two lovers sat together on the river bank.",depository,False,False,0.929276168346405,0.8961890935897827,0.9209432601928711
+river_bank,word sense disambiguation,bank,"Watching the sunset, the two lovers sat together on the river bank.",fund,False,False,0.9047327041625977,0.9336349964141846,0.9185914993286133
+river_bank,word sense disambiguation,bank,"Watching the sunset, the two lovers sat together on the river bank.",levee,False,False,0.9047446846961975,0.8807500600814819,0.8706995248794556
+sunset,near synonym,sunset,"Watching the sunset, the two lovers sat together on the river bank.",dusk,True,False,0.9579038023948669,0.959873378276825,0.9221437573432922
+sunset,near synonym,sunset,"Watching the sunset, the two lovers sat together on the river bank.",nightfall,False,False,0.920647144317627,0.9307912588119507,0.9254615306854248
+sunset,near synonym,sunset,"Watching the sunset, the two lovers sat together on the river bank.",sundown,True,False,0.9616849422454834,0.9366397857666016,0.9167448878288269
+sunset,near synonym,sunset,"Watching the sunset, the two lovers sat together on the river bank.",sunrise,False,False,0.9600224494934082,0.9135175943374634,0.9158351421356201

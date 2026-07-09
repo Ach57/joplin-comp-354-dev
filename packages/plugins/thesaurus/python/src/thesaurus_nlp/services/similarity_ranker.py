@@ -3,6 +3,7 @@ import logging
 from sentence_transformers import SentenceTransformer
 from sentence_transformers.util import cos_sim
 
+from src.thesaurus_nlp.config.settings import DEFAULT_MODEL, ModelType
 from src.thesaurus_nlp.models.entities import Candidate, ScoredCandidate
 from src.thesaurus_nlp.interfaces.providers import AbstractSimilarityRanker
 
@@ -17,7 +18,8 @@ class NoOpSimilarityRanker(AbstractSimilarityRanker):
 class SimilarityRanker(AbstractSimilarityRanker):
 	"""Scores candidates based on cosine similarity of context embeddings."""
 
-	def __init__(self, model_name: str):
+	def __init__(self, model_name: ModelType | None = None):
+		model_name = model_name or DEFAULT_MODEL
 		try:
 			self.model = SentenceTransformer(model_name, local_files_only=True)
 		except Exception:

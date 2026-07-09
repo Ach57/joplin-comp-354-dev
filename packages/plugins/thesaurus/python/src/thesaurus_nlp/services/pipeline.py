@@ -9,7 +9,7 @@ class Pipeline(AbstractPipeline):
 		self.min_score = min_score
 
 	def rank(self, request: RankRequest) -> RankResponse:
-		candidates = self.wordnet_service.get_related_words(request.word, request.context)
+		candidates = self.wordnet_service.get_related_words(request.word)
 
 		scored_candidates = self.similarity_ranker.score_candidates(candidates, request.word, request.context)
 		scored_candidates.sort(key=lambda x: x.score, reverse=True)

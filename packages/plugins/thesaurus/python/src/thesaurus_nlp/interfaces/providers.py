@@ -4,7 +4,7 @@ from thesaurus_nlp.models.entities import Candidate, ScoredCandidate
 
 class AbstractWordNetService(ABC):
 	@abstractmethod
-	def get_related_words(self, word: str, context: str | None) -> list[Candidate]:
+	def get_related_words(self, word: str) -> list[Candidate]:
 		...
 
 class AbstractSimilarityRanker(ABC):
