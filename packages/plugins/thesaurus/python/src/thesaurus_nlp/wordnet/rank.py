@@ -2,7 +2,7 @@ import json
 import sys
 from typing import Any, Dict, List
 
-from wordnet_loader import get_synonym_candidates
+from thesaurus_nlp.wordnet.wordnet_loader import get_synonym_candidates
 
 
 def make_error_response(request_id: str, message: str) -> Dict[str, Any]:

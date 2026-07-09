@@ -20,7 +20,7 @@ class WordNetService(AbstractWordNetService):
         if self._backend is not None:
             return
 
-        data_path = Path(__file__).resolve().parents[3] / 'src' / 'python' / 'wordnet_data.json'
+        data_path = Path(__file__).resolve().parent / 'wordnet' / 'wordnet_data.json'
         with data_path.open('r', encoding='utf-8') as handle:
             self._backend = json.load(handle)
 
