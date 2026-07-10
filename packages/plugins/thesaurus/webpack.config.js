@@ -25,7 +25,10 @@ const distDir = path.resolve(rootDir, 'dist');
 const srcDir = path.resolve(rootDir, 'src');
 const publishDir = path.resolve(rootDir, 'publish');
 
-const userConfig = { extraScripts: [], ...(fs.pathExistsSync(userConfigPath) ? require(userConfigFilename) : {}) };
+const userConfig = {
+	extraScripts: [],
+	...(fs.pathExistsSync(userConfigPath) ? require(userConfigFilename) : {}),
+};
 
 const manifestPath = `${srcDir}/manifest.json`;
 const packageJsonPath = `${rootDir}/package.json`;
@@ -36,15 +39,29 @@ const pluginInfoFilePath = path.resolve(publishDir, `${manifest.id}.json`);
 function validatePackageJson() {
 	const content = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
 	if (!content.name || content.name.indexOf('joplin-plugin-') !== 0) {
-		console.warn(chalk.yellow(`WARNING: To publish the plugin, the package name should start with "joplin-plugin-" (found "${content.name}") in ${packageJsonPath}`));
+		console.warn(
+			chalk.yellow(
+				`WARNING: To publish the plugin, the package name should start with "joplin-plugin-" (found "${content.name}") in ${packageJsonPath}`,
+			),
+		);
 	}
 
 	if (!content.keywords || content.keywords.indexOf('joplin-plugin') < 0) {
-		console.warn(chalk.yellow(`WARNING: To publish the plugin, the package keywords should include "joplin-plugin" (found "${JSON.stringify(content.keywords)}") in ${packageJsonPath}`));
+		console.warn(
+			chalk.yellow(
+				`WARNING: To publish the plugin, the package keywords should include "joplin-plugin" (found "${JSON.stringify(
+					content.keywords,
+				)}") in ${packageJsonPath}`,
+			),
+		);
 	}
 
 	if (content.scripts && content.scripts.postinstall) {
-		console.warn(chalk.yellow(`WARNING: package.json contains a "postinstall" script. It is recommended to use a "prepare" script instead so that it is executed before publish. In ${packageJsonPath}`));
+		console.warn(
+			chalk.yellow(
+				`WARNING: package.json contains a "postinstall" script. It is recommended to use a "prepare" script instead so that it is executed before publish. In ${packageJsonPath}`,
+			),
+		);
 	}
 }
 
@@ -55,14 +72,25 @@ function fileSha256(filePath) {
 
 function currentGitInfo() {
 	try {
-		let branch = execSync('git rev-parse --abbrev-ref HEAD', { stdio: 'pipe' }).toString().trim();
-		const commit = execSync('git rev-parse HEAD', { stdio: 'pipe' }).toString().trim();
+		let branch = execSync('git rev-parse --abbrev-ref HEAD', { stdio: 'pipe' })
+			.toString()
+			.trim();
+		const commit = execSync('git rev-parse HEAD', { stdio: 'pipe' })
+			.toString()
+			.trim();
 		if (branch === 'HEAD') branch = 'master';
 		return `${branch}:${commit}`;
 	} catch (error) {
 		const messages = error.message ? error.message.split('\n') : [''];
-		console.info(chalk.cyan('Could not get git commit (not a git repo?):', messages[0].trim()));
-		console.info(chalk.cyan('Git information will not be stored in plugin info file'));
+		console.info(
+			chalk.cyan(
+				'Could not get git commit (not a git repo?):',
+				messages[0].trim(),
+			),
+		);
+		console.info(
+			chalk.cyan('Git information will not be stored in plugin info file'),
+		);
 		return '';
 	}
 }
@@ -70,15 +98,20 @@ function currentGitInfo() {
 function readManifest(manifestPath) {
 	const content = fs.readFileSync(manifestPath, 'utf8');
 	const output = JSON.parse(content);
-	if (!output.id) throw new Error(`Manifest plugin ID is not set in ${manifestPath}`);
+	if (!output.id) { throw new Error(`Manifest plugin ID is not set in ${manifestPath}`); }
 	return output;
 }
 
 function createPluginArchive(sourceDir, destPath) {
-	const distFiles = glob.sync(`${sourceDir}/**/*`, { nodir: true })
-		.map(f => f.substr(sourceDir.length + 1));
+	const distFiles = glob
+		.sync(`${sourceDir}/**/*`, { nodir: true })
+		.map((f) => f.substr(sourceDir.length + 1));
 
-	if (!distFiles.length) throw new Error('Plugin archive was not created because the "dist" directory is empty');
+	if (!distFiles.length) {
+		throw new Error(
+			'Plugin archive was not created because the "dist" directory is empty',
+		);
+	}
 	fs.removeSync(destPath);
 
 	tar.create(
@@ -129,7 +162,9 @@ const baseConfig = {
 	},
 };
 
-const pluginConfig = { ...baseConfig, entry: './src/index.ts',
+const pluginConfig = {
+	...baseConfig,
+	entry: './src/index.ts',
 	resolve: {
 		alias: {
 			api: path.resolve(__dirname, 'api'),
@@ -158,17 +193,22 @@ const pluginConfig = { ...baseConfig, entry: './src/index.ts',
 				},
 			],
 		}),
-	] };
+	],
+};
 
-const extraScriptConfig = { ...baseConfig, resolve: {
-	alias: {
-		api: path.resolve(__dirname, 'api'),
+const extraScriptConfig = {
+	...baseConfig,
+	resolve: {
+		alias: {
+			api: path.resolve(__dirname, 'api'),
+		},
+		extensions: ['.tsx', '.ts', '.js'],
 	},
-	extensions: ['.tsx', '.ts', '.js'],
-} };
+};
 
 const createArchiveConfig = {
 	stats: 'errors-only',
+	target: 'node',
 	entry: './dist/index.js',
 	output: {
 		filename: 'index.js',
@@ -181,7 +221,7 @@ function resolveExtraScriptPath(name) {
 	const relativePath = `./src/${name}`;
 
 	const fullPath = path.resolve(`${rootDir}/${relativePath}`);
-	if (!fs.pathExistsSync(fullPath)) throw new Error(`Could not find extra script: "${name}" at "${fullPath}"`);
+	if (!fs.pathExistsSync(fullPath)) { throw new Error(`Could not find extra script: "${name}" at "${fullPath}"`); }
 
 	const s = name.split('.');
 	s.pop();
@@ -206,8 +246,11 @@ function buildExtraScriptConfigs(userConfig) {
 
 	for (const scriptName of userConfig.extraScripts) {
 		const scriptPaths = resolveExtraScriptPath(scriptName);
-		output.push({ ...extraScriptConfig, entry: scriptPaths.entry,
-			output: scriptPaths.output });
+		output.push({
+			...extraScriptConfig,
+			entry: scriptPaths.entry,
+			output: scriptPaths.output,
+		});
 	}
 
 	return output;
@@ -218,7 +261,11 @@ function main(processArgv) {
 	const argv = yargs(processArgv).argv;
 
 	const configName = argv['joplin-plugin-config'];
-	if (!configName) throw new Error('A config file must be specified via the --joplin-plugin-config flag');
+	if (!configName) {
+		throw new Error(
+			'A config file must be specified via the --joplin-plugin-config flag',
+		);
+	}
 
 	// Webpack configurations run in parallel, while we need them to run in
 	// sequence, and to do that it seems the only way is to run webpack multiple
