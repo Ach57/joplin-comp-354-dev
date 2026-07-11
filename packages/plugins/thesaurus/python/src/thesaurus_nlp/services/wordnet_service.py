@@ -44,16 +44,14 @@ class WordNetService(AbstractWordNetService):
 
         for token, treebank_tag in tagged:
             if token.lower() == normalized:
+                logger.debug(f"word: {normalized}, treebank_tag: {treebank_tag}")
                 return cls._get_pos_value(treebank_tag)
+
         return None
 
-    def get_related_words(self, word: str, context: str | None) -> list[Candidate]:
-        normalized = self._normalize_word(word)
-        if not normalized:
-            return []
-
-        pos = self._get_pos(word, context)
-        synsets = wn.synsets(normalized, pos=pos)
+    @staticmethod
+    def _get_related_words(word: str, pos: str | None) -> list[Candidate]:
+        synsets = wn.synsets(word, pos=pos)
 
         seen: set[str] = set()
         candidates: list[Candidate] = []
@@ -62,7 +60,7 @@ class WordNetService(AbstractWordNetService):
             for lemma in synset.lemmas():
                 candidate_word = lemma.name().replace("_", " ")
 
-                if normalized.replace("_", " ") in candidate_word.lower():
+                if word.replace("_", " ") in candidate_word.lower():
                     continue
 
                 if candidate_word not in seen:
@@ -74,5 +72,15 @@ class WordNetService(AbstractWordNetService):
                             source="nltk-wordnet",
                         )
                     )
+
+        return candidates
+
+    def get_related_words(self, word: str, context: str | None) -> list[Candidate]:
+        normalized = self._normalize_word(word)
+        if not normalized:
+            return []
+
+        pos = self._get_pos(word, context)
+        candidates = self._get_related_words(normalized, pos)
 
         return candidates
