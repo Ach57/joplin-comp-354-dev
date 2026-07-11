@@ -18,7 +18,7 @@
     "test-ci": "yarn test",
     "resolve-sourcemap": "node tools/resolveSourceMap.js",
     "modifyReleaseAssets": "node tools/modifyReleaseAssets.js",
-    "with:thesaurus": "yarn start --dev-plugins ../plugins/thesaurus"
+    "with:thesaurus": "yarn start --dev-plugins ../plugins/thesaurus/dist"
   },
   "repository": {
     "type": "git",
