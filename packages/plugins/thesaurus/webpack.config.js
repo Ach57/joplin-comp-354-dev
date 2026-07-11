@@ -151,6 +151,10 @@ const baseConfig = {
 	mode: 'production',
 	target: 'node',
 	stats: 'errors-only',
+	node: {
+		__dirname: false,
+		__filename: false,
+	},
 	module: {
 		rules: [
 			{
