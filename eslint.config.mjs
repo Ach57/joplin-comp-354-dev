@@ -235,8 +235,8 @@ export default defineConfig([
       ],
       "block-spacing": ["error"],
       "brace-style": ["error", "1tbs", { allowSingleLine: true }],
-      "no-spaced-func": ["error"],
-      "func-call-spacing": ["error"],
+      "no-spaced-func": ["off"],
+      "func-call-spacing": ["off"],
       "space-before-function-paren": [
         "error",
         {

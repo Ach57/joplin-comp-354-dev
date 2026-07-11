@@ -328,3 +328,4 @@ stdio
 doesnotexist
 NDJSON
 polyfilling
+venv
