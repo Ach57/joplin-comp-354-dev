@@ -115,7 +115,7 @@ export default function(context: ContentScriptContext) {
 					gap: 10px;
 				`;
 
-				const spinner = document.createElement('div'); // Adds the temporary loading symbol (the spinner)
+				const spinner = document.createElement('div'); // Adds loading symbol (the spinner)
 				spinner.style.cssText = `
 					width: 16px;
 					height: 16px;
@@ -134,7 +134,7 @@ export default function(context: ContentScriptContext) {
 				document.body.appendChild(popup);
 
 				setTimeout(() => {
-					// This closes the popup if the user clicks somewhere outside the box
+					// Incase user wants to quickly get out of popup
 					document.addEventListener('mousedown', function handler(e) {
 						if (!popup.contains(e.target as Node)) {
 							removeExistingPopup();
@@ -142,6 +142,52 @@ export default function(context: ContentScriptContext) {
 						}
 					});
 				}, 100);
+			}
+
+			function showStatusPopup(
+				message: string,
+				type: 'error' | 'warning',
+			) {
+				removeExistingPopup();
+
+				const popup = document.createElement('div');
+				popup.id = 'synonym-popup';
+				popup.setAttribute('role', 'alert');
+				popup.style.cssText = `
+					position: fixed;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					background: #2b2b2b;
+					color: #e0e0e0;
+					border: 1px solid ${type === 'error' ? '#d9534f' : '#ffcb81'};
+					border-radius: 6px;
+					padding: 14px 18px;
+					font-size: 14px;
+					font-family: sans-serif;
+					box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+					z-index: 99999;
+					min-width: 260px;
+					max-width: 380px;
+					display: flex;
+					align-items: center;
+					gap: 10px;
+				`;
+
+				
+				
+				const label = document.createElement('span');
+				label.textContent = message;
+
+				popup.appendChild(label);
+				document.body.appendChild(popup);
+
+				// closes after 4.5 seconds
+				setTimeout(() => {
+					if (document.getElementById('synonym-popup') === popup) {
+						removeExistingPopup();
+					}
+				}, 4500);
 			}
 
 			function replaceSelectedWord(synonym: string) {
@@ -252,18 +298,24 @@ export default function(context: ContentScriptContext) {
 						'Synonym Finder: Error. Something went wrong. Please try again soon',
 						response,
 					);
-					removeExistingPopup();
+					showStatusPopup(
+						'Something went wrong while finding synonyms. Please try again soon.',
+						'error',
+					);
 					return;
 				}
 				if (
 					response.status === 'empty' ||
-          !response.synonyms ||
-          response.synonyms.length === 0
+					!response.synonyms ||
+					response.synonyms.length === 0
 				) {
 					console.warn(
 						'Synonym Finder: No synonyms found. Please try writing some more and retrying',
 					);
-					removeExistingPopup();
+					showStatusPopup(
+						'No synonyms were found. Try another word or add more sentence context.',
+						'warning',
+					);
 					return;
 				}
 				showSynonymOptionsPopup(response.synonyms);
@@ -275,9 +327,9 @@ export default function(context: ContentScriptContext) {
 				// For the context menu
 				const selectedText = cm.getSelection().trim();
 
-				// *Made it so the user can only select ONE word for it to find a synonym!!
 				if (!selectedText || selectedText.includes(' ')) {
 					console.warn('Synonym Finder: Please select a single word.');
+					showStatusPopup('Please select exactly one word.', 'warning');
 					return;
 				}
 
@@ -302,13 +354,21 @@ export default function(context: ContentScriptContext) {
 				);
 				showLoadingPopup();
 
-				const response = (await context.postMessage({
-					// This sends the word and the sentence context back to index.ts
-					type: 'synonymRequest',
-					word: selectedText,
-					context: sentenceContext,
-				})) as SynonymResponse;
-				handleSynonymResponse(response);
+				try {
+					const response = (await context.postMessage({
+						// This sends the word and the sentence context back to index.ts
+						type: 'synonymRequest',
+						word: selectedText,
+						context: sentenceContext,
+					})) as SynonymResponse;
+					handleSynonymResponse(response);
+				} catch (error) {
+					console.error('Synonym Finder: Request failed:', error);
+					showStatusPopup(
+						'Could not connect to the synonym service. Please try again.',
+						'error',
+					);
+				}
 			};
 		},
 		codeMirrorOptions: {},
