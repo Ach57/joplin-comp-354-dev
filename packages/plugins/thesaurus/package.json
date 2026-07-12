@@ -6,7 +6,11 @@
     "prepare": "npm run dist",
     "test": "jest",
     "test:unit": "jest tests/unit",
-    "test:integration": "jest tests/integration"
+    "test:integration": "jest tests/integration",
+    "test:integration:nlpBackend": "npx jest tests/integration/NlpBackend.integration.test.ts --verbose",
+    "test:unit:python:paths": "npx jest tests/unit/Path.test.ts --verbose"
+
+    
   },
   "publishConfig": {
     "access": "public"

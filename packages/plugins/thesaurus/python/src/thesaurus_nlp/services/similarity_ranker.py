@@ -3,8 +3,8 @@ import logging
 from sentence_transformers import SentenceTransformer
 from sentence_transformers.util import cos_sim
 
-from src.thesaurus_nlp.models.entities import Candidate, ScoredCandidate
-from src.thesaurus_nlp.interfaces.providers import AbstractSimilarityRanker
+from thesaurus_nlp.models.entities import Candidate, ScoredCandidate
+from thesaurus_nlp.interfaces.providers import AbstractSimilarityRanker
 
 logger = logging.getLogger(__name__)
 
