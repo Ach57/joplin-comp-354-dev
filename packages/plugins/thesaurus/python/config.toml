@@ -1,0 +1,4 @@
+model_name = 'sentence-transformers/all-MiniLM-L6-v2'
+min_score = 0.85
+log_level = 'ERROR'
+log_file = 'logs/joplin_thesaurus_nlp.log'
