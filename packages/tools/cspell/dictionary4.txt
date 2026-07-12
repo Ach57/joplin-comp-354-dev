@@ -329,3 +329,12 @@ doesnotexist
 NDJSON
 polyfilling
 venv
+pyproject
+nltk
+pydantic
+NLTK
+wordnet
+perceptron
+punkt
+pyproject
+Incase

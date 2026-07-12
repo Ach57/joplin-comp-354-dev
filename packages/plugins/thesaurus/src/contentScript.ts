@@ -144,10 +144,7 @@ export default function(context: ContentScriptContext) {
 				}, 100);
 			}
 
-			function showStatusPopup(
-				message: string,
-				type: 'error' | 'warning',
-			) {
+			function showStatusPopup(message: string, type: 'error' | 'warning') {
 				removeExistingPopup();
 
 				const popup = document.createElement('div');
@@ -174,8 +171,6 @@ export default function(context: ContentScriptContext) {
 					gap: 10px;
 				`;
 
-				
-				
 				const label = document.createElement('span');
 				label.textContent = message;
 
@@ -296,7 +291,7 @@ export default function(context: ContentScriptContext) {
 				if (!response || response.status === 'error') {
 					console.error(
 						'Synonym Finder: Error. Something went wrong. Please try again soon',
-						response,
+						JSON.stringify(response),
 					);
 					showStatusPopup(
 						'Something went wrong while finding synonyms. Please try again soon.',
@@ -306,8 +301,8 @@ export default function(context: ContentScriptContext) {
 				}
 				if (
 					response.status === 'empty' ||
-					!response.synonyms ||
-					response.synonyms.length === 0
+          !response.synonyms ||
+          response.synonyms.length === 0
 				) {
 					console.warn(
 						'Synonym Finder: No synonyms found. Please try writing some more and retrying',

@@ -1988,7 +1988,9 @@ packages/plugins/thesaurus/src/interfaces/IPythonProcessManager.js
 packages/plugins/thesaurus/src/interfaces/IRankingService.js
 packages/plugins/thesaurus/src/services/RankingService.js
 packages/plugins/thesaurus/src/types/types.js
+packages/plugins/thesaurus/tests/integration/NlpBackend.integration.test.js
 packages/plugins/thesaurus/tests/integration/PythonProcessManager.integration.test.js
+packages/plugins/thesaurus/tests/unit/Path.test.js
 packages/plugins/thesaurus/tests/unit/PythonProcessManager.test.js
 packages/plugins/thesaurus/tests/unit/RankingService.test.js
 packages/react-native-saf-x/src/index.js
